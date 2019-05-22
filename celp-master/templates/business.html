@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Celp</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="/static/css/shop-homepage.css" rel="stylesheet">
+</head>
+
+<body>
+  {% include 'nav.html' %}
+
+  <!-- Page Content -->
+  <div class="container product_container">
+
+    <div class="row">
+      <div class="col-lg-9">
+        <!-- Business card -->
+        <div class="col-lg-12 col-md-6 mb-4">
+          {% with card={
+              'name':business['name'],
+              'img':'http://placehold.it/700x400',
+              'text':'Description here',
+              'stars':business['stars']
+          } %}
+            {% include 'card.html' %}
+          {% endwith %}
+        </div>
+
+
+        <!-- Reviews below for business -->
+        {% for review in reviews %}
+          <div class="col-lg-12 col-md-6 mb-4">
+            {% with card={
+                'text':review['text'],
+                'stars':review['stars']
+            } %}
+              {% include 'card.html' %}
+            {% endwith %}
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Recommendations -->
+      <div class="col-lg-3">
+        <div class="row">
+          {% for recommendation in recommendations %}
+            <div class="col-lg-12 col-md-6 mb-4">
+              {% with card={
+                  'name':recommendation["name"],
+                  'link':url_for('business', city=recommendation['city'], id=recommendation['business_id']),
+                  'text':'Description here',
+                  'stars':recommendation['stars']
+              } %}
+                {% include 'card.html' %}
+              {% endwith %}
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="/static/vendor/jquery/jquery.min.js"></script>
+  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

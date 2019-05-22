@@ -1,0 +1,9 @@
+{% set stars_int = ((stars|float) * 2)|int %}
+<small class="text-muted">
+  {% for star in range(stars_int) %}
+    &#9733;
+  {% endfor %}
+  {% for star in range(10 - stars_int) %}
+    &#9734;
+  {% endfor %}
+</small>
